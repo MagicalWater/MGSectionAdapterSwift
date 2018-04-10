@@ -1,0 +1,6 @@
+framework module MGExtensionSwift {
+  umbrella header "MGExtensionSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

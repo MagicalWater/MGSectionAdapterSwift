@@ -1,0 +1,6 @@
+framework module MGViewsSwift {
+  umbrella header "MGViewsSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

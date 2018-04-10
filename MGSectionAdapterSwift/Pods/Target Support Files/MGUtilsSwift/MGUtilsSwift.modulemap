@@ -1,0 +1,6 @@
+framework module MGUtilsSwift {
+  umbrella header "MGUtilsSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
