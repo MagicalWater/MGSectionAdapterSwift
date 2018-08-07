@@ -7,5 +7,8 @@ TableView/CollectionView 通用 Adapter
 1. 置頂/更多加載, 下拉刷新
 2. 擁有無限層級, 讓每個cell都可為一個section  
 
+版本更迭:  
+0.0.1 - 初始提交專案  
+
 使用方式:  
 pod 'MGSectionAdapterSwift', '~> {version}'
