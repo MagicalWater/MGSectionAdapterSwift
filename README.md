@@ -1,5 +1,7 @@
 # MGSectionAdapterSwift
-![](https://img.shields.io/cocoapods/v/MGSectionAdapterSwift.svg?style=flat)  
+![](https://img.shields.io/cocoapods/v/MGSectionAdapterSwift.svg?style=flat) 
+![](https://img.shields.io/badge/platform-ios-lightgrey.svg) 
+![](https://img.shields.io/badge/language-swift-orange.svg)  
 
 TableView/CollectionView 通用 Adapter  
 如同於 Android 的 RecyclerView Adapter 的概念  
