@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MGSectionAdapterSwift"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "All item in table/collect can be a section."
 
   # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
                    All item in table/collect can be a section.
                    DESC
 
-  s.homepage     = "https://github.com/CrazyDavis/MGSectionAdapterSwift"
+  s.homepage     = "https://github.com/MagicalWater/MGSectionAdapterSwift"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/CrazyDavis/MGSectionAdapterSwift.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/MagicalWater/MGSectionAdapterSwift.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

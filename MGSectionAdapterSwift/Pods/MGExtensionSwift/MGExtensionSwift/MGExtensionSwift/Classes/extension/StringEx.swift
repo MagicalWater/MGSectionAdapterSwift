@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public extension String {
 
@@ -92,5 +93,29 @@ public extension String {
         }
     }
 
+    //字串寬度
+    public func width(_ font: UIFont?) -> CGFloat {
+        return size(font).width
+    }
+
+    //字串高度
+    public func height(_ font: UIFont?) -> CGFloat {
+        return size(font).height
+    }
+
+    //字串size
+    public func size(_ font: UIFont?) -> CGSize {
+        let attributes = font != nil ? [NSAttributedStringKey.font: font!] : [:]
+        let size = self.size(withAttributes: attributes)
+        return size
+    }
+
+    //字串高度(有限制寬度)
+    public func height(_ font: UIFont?, withWidth: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: withWidth, height: .greatestFiniteMagnitude)
+        let attributes = font != nil ? [NSAttributedStringKey.font: font!] : [:]
+        let boundingBox = self.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attributes, context: nil)
+        return boundingBox.height
+    }
 
 }

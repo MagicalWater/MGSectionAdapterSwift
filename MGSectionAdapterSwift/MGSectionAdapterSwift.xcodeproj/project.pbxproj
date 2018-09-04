@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8AF9B0A1DE8C2843993A61FD /* Pods_MGSectionAdapterSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F482576014D28F0F1AA8AB /* Pods_MGSectionAdapterSwift.framework */; };
+		B8160B76213E490E000EB4BD /* MGSectionAdapterSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B8160B75213E490E000EB4BD /* MGSectionAdapterSwift.podspec */; };
+		B8160B78213E4915000EB4BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B8160B77213E4915000EB4BD /* README.md */; };
 		B8776D80207C9C2200CC8442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8776D7F207C9C2200CC8442 /* AppDelegate.swift */; };
 		B8776D82207C9C2200CC8442 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8776D81207C9C2200CC8442 /* ViewController.swift */; };
 		B8776D85207C9C2200CC8442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8776D83207C9C2200CC8442 /* Main.storyboard */; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		50F482576014D28F0F1AA8AB /* Pods_MGSectionAdapterSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MGSectionAdapterSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3FFBEE05ABC061662EC5A0E /* Pods-MGSectionAdapterSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSectionAdapterSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSectionAdapterSwift/Pods-MGSectionAdapterSwift.release.xcconfig"; sourceTree = "<group>"; };
+		B8160B75213E490E000EB4BD /* MGSectionAdapterSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MGSectionAdapterSwift.podspec; path = ../../MGSectionAdapterSwift.podspec; sourceTree = "<group>"; };
+		B8160B77213E4915000EB4BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		B8776D7C207C9C2200CC8442 /* MGSectionAdapterSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGSectionAdapterSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8776D7F207C9C2200CC8442 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8776D81207C9C2200CC8442 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 				B8776D86207C9C2200CC8442 /* Assets.xcassets */,
 				B8776D88207C9C2200CC8442 /* LaunchScreen.storyboard */,
 				B8776D8B207C9C2200CC8442 /* Info.plist */,
+				B8160B77213E4915000EB4BD /* README.md */,
+				B8160B75213E490E000EB4BD /* MGSectionAdapterSwift.podspec */,
 				B8776D91207C9CB900CC8442 /* Classes */,
 			);
 			path = MGSectionAdapterSwift;
@@ -193,7 +199,6 @@
 				B8776D79207C9C2200CC8442 /* Frameworks */,
 				B8776D7A207C9C2200CC8442 /* Resources */,
 				D599EBD7354DD2AF1825750B /* [CP] Embed Pods Frameworks */,
-				8DBC721D04EA602A461FECD1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -243,7 +248,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8160B76213E490E000EB4BD /* MGSectionAdapterSwift.podspec in Resources */,
 				B8776D8A207C9C2200CC8442 /* LaunchScreen.storyboard in Resources */,
+				B8160B78213E4915000EB4BD /* README.md in Resources */,
 				B8776D87207C9C2200CC8442 /* Assets.xcassets in Resources */,
 				B8776D85207C9C2200CC8442 /* Main.storyboard in Resources */,
 			);
@@ -268,21 +275,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DBC721D04EA602A461FECD1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MGSectionAdapterSwift/Pods-MGSectionAdapterSwift-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D599EBD7354DD2AF1825750B /* [CP] Embed Pods Frameworks */ = {

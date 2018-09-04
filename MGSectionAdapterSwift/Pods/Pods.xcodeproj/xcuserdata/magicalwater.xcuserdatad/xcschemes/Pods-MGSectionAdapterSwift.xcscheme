@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0D37EE6D4308274E8F3DB892BF2B186C"
+               BlueprintIdentifier = "79CEC9BC88725D3BC2E2A549BA240B79"
                BuildableName = "Pods_MGSectionAdapterSwift.framework"
                BlueprintName = "Pods-MGSectionAdapterSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0D37EE6D4308274E8F3DB892BF2B186C"
+            BlueprintIdentifier = "79CEC9BC88725D3BC2E2A549BA240B79"
             BuildableName = "Pods_MGSectionAdapterSwift.framework"
             BlueprintName = "Pods-MGSectionAdapterSwift"
             ReferencedContainer = "container:Pods.xcodeproj">

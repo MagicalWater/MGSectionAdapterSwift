@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 import MGUtilsSwift
 
+/**
+ 2018.9.4: 取消加載 置頂/更多 的動畫顯示, 一律改用靜態顯示, 因為使用者操作上可能造成不便
+ */
 open class MGBaseCollectionAdapter : MGBaseScrollAdapter, MGBaseCollectionDataBindDelegate, MGBaseCollectionCustomSizeDelegate {
 
     public static let TYPE_OUTTER_HEADER = -1001
@@ -178,36 +181,56 @@ extension MGBaseCollectionAdapter: UICollectionViewDataSource, UICollectionViewD
         //如果 pos 是 最後一個位置, 並且 outerFooter 有開啟即是 TYPE_OUTTER_FOOTER
         if indexPath.section == 0 && sectionGroup.outerHeader {
 
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID_OUTER_TOP, for: indexPath) as! MGBaseCollectionCell
+            
             //如果正在休息, 跳過
             if (!loadtopHelper.isBreath && loadtopDelegate?.hasLoadtop() == true) {
+                settingHeaderText(cell, isLoading: true)
                 //如果正在加載置頂, 也跳過
                 if (!loadtopHelper.isLoading) {
                     loadtopHelper.isLoading = true
-                    collectionView.performBatchUpdates(nil, completion: nil)
-                    timer.startCountdown(what: 0x1, byDelay: loadtopHelper.animDuration) {
-                        self.loadtopDelegate?.startLoadtop()
-                    }
+                    //2018.9.4: 取消動畫更新, 一律靜態顯示
+                    //因此也不需要延遲回調
+                    bindOuterHeaderCell(cell, indexPath: indexPath)
+                    self.loadtopDelegate?.startLoadtop()
+//                    collectionView.performBatchUpdates(nil, completion: nil)
+//                    timer.startCountdown(what: 0x1, byDelay: loadtopHelper.animDuration) {
+//                        self.loadtopDelegate?.startLoadtop()
+//                    }
+                } else {
+                    bindOuterHeaderCell(cell, indexPath: indexPath)
                 }
+            } else {
+                settingHeaderText(cell, isLoading: false)
+                bindOuterHeaderCell(cell, indexPath: indexPath)
             }
 
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID_OUTER_TOP, for: indexPath) as! MGBaseCollectionCell
-            bindOuterHeaderCell(cell, indexPath: indexPath)
         } else if (indexPath.section == sectionGroup.getOuterSectionCount()-1) && sectionGroup.outerFooter {
 
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID_OUTER_BOTTOM, for: indexPath) as! MGBaseCollectionCell
+            
             //如果正在休息, 跳過
             if (!loadmoreHelper.isBreath && loadmoreDelegate?.hasLoadmore() == true) {
+                settingFooterText(cell, isLoading: true)
                 //如果正在加載更多, 也跳過
                 if (!loadmoreHelper.isLoading) {
                     loadmoreHelper.isLoading = true
-                    collectionView.performBatchUpdates(nil, completion: nil)
-                    timer.startCountdown(what: 0x2, byDelay: loadtopHelper.animDuration) {
-                        self.loadmoreDelegate?.startLoadmore()
-                    }
+                    //2018.9.4: 取消動畫更新, 一律靜態顯示
+                    //因此也不需要延遲回調
+                    bindOuterFooterCell(cell, indexPath: indexPath)
+                    self.loadmoreDelegate?.startLoadmore()
+//                    collectionView.performBatchUpdates(nil, completion: nil)
+//                    timer.startCountdown(what: 0x2, byDelay: loadtopHelper.animDuration) {
+//                        self.loadmoreDelegate?.startLoadmore()
+//                    }
+                } else {
+                    bindOuterFooterCell(cell, indexPath: indexPath)
                 }
+            } else {
+                settingFooterText(cell, isLoading: false)
+                bindOuterFooterCell(cell, indexPath: indexPath)
             }
 
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID_OUTER_BOTTOM, for: indexPath) as! MGBaseCollectionCell
-            bindOuterFooterCell(cell, indexPath: indexPath)
         } else {
             //先取得此位置的section
             let sectionData = sectionGroup.getSection(indexPath)
@@ -274,12 +297,16 @@ extension MGBaseCollectionAdapter: UICollectionViewDataSource, UICollectionViewD
         //如果 pos 是 最後一個位置, 並且 outerFooter 有開啟即是 TYPE_OUTTER_FOOTER
         if indexPath.section == 0 && sectionGroup.outerHeader {
             //先查看當前是處於置頂刷新狀態
-            if !loadtopHelper.isLoading { size = nil }
-            else { size = customOuterHeaderCellSize(indexPath) }
+            //2018.9.4: 取消動畫更新, 一律靜態顯示
+//            if !loadtopHelper.isLoading { size = nil }
+//            else { size = customOuterHeaderCellSize(indexPath) }
+            size = customOuterHeaderCellSize(indexPath)
         } else if (indexPath.section == sectionGroup.getOuterSectionCount()-1) && sectionGroup.outerFooter {
             //先查看當前是處於置底 刷新狀態
-            if !loadmoreHelper.isLoading { size = nil }
-            else { size = customOuterFooterCellSize(indexPath) }
+            //2018.9.4: 取消動畫更新, 一律靜態顯示
+//            if !loadmoreHelper.isLoading { size = nil }
+//            else { size = customOuterFooterCellSize(indexPath) }
+            size = customOuterFooterCellSize(indexPath)
         } else {
             //先取得此位置的section
             let sectionData = sectionGroup.getSection(indexPath)
@@ -322,7 +349,23 @@ extension MGBaseCollectionAdapter: UICollectionViewDataSource, UICollectionViewD
         }
     }
 
-
+    //設定置頂加載文字顯示
+    private func settingHeaderText(_ cell: MGBaseCollectionCell, isLoading: Bool) {
+//        if isLoading {
+//            cell.label.text = "置頂加載中..."
+//        } else {
+//            cell.label.text = "已是最新"
+//        }
+    }
+    
+    //設定置頂加載文字顯示
+    private func settingFooterText(_ cell: MGBaseCollectionCell, isLoading: Bool) {
+//        if isLoading {
+//            cell.label.text = "更多加載中..."
+//        } else {
+//            cell.label.text = "已無更多"
+//        }
+    }
 
 }
 
@@ -333,7 +376,7 @@ extension MGBaseCollectionAdapter : MGSectionDelegate {
 
     //設定擴展狀態
     public func setExpandStatusAndRefresh(_ section: MGSection, status: Bool) -> Int {
-        var changeCount = setExpandStatus(section, status: status)
+        let changeCount = setExpandStatus(section, status: status)
         let startIndex = IndexPath(row: section.absolatePos.row+1, section: section.absolatePos.section)
 
         if changeCount > 0 {
@@ -476,13 +519,8 @@ extension MGBaseCollectionAdapter : MGSectionDelegate {
     }
 }
 
-
-
-
 //table綁定資料相關
 public protocol MGBaseCollectionDataBindDelegate {
-
-
     //同步顯示某個section的header
     func bindSectionHeaderView(_ view: MGCollectionHeaderFooterReuseView, section: Int, header: MGSectionGroup.MGSectionHeader)
 
@@ -499,25 +537,6 @@ public protocol MGBaseCollectionDataBindDelegate {
     func bindOuterFooterCell(_ cell: MGBaseCollectionCell, indexPath: IndexPath)
 }
 
-
-//extension MGBaseTableDataBindDelegate {
-//    //同步顯示某個section的header
-//    public func bindSectionHeaderView(_ section: Int, header: MGSectionGroup.MGSectionHeader) -> UIView? {
-//        return nil
-//    }
-//
-//    //同步顯示某個section的footer
-//    public func bindSectionFooterView(_ section: Int, footer: MGSectionGroup.MGSectionFooter) -> UIView? {
-//        return nil
-//    }
-//
-//    //同步顯示某個section
-//    public func bindSectionCell(_ cell: MGBaseTableCell, indexPath: IndexPath, section: MGSection) {}
-//}
-
-
-
-
 //table高度相關
 public protocol MGBaseCollectionCustomSizeDelegate {
     //是否自定義某個cell的高度
@@ -531,28 +550,5 @@ public protocol MGBaseCollectionCustomSizeDelegate {
     //是否自定義section footer的高度
     func customSectionFooterSize(_ section: Int, footer: MGSectionGroup.MGSectionFooter) -> CGSize?
 }
-
-//extension MGBaseCollectionCustomSizeDelegate {
-//    //是否自定義某個cell的高度
-//    public func customSectionCellSize(_ indexPath: IndexPath, section: MGSection) -> CGSize? {
-//        return nil
-//    }
-//    //是否自定義最外層頂部cell的高度
-//    public func customOuterHeaderCellSize(_ indexPath: IndexPath) -> CGSize? {
-//        return nil
-//    }
-//    //是否自定義最外層底下cell的高度
-//    public func customOuterFooterCellSize(_ indexPath: IndexPath) -> CGSize? {
-//        return nil
-//    }
-//    //是否自定義section header的高度
-//    public func customSectionHeaderSize(_ section: Int, header: MGSectionGroup.MGSectionHeader) -> CGSize? {
-//        return nil
-//    }
-//    //是否自定義section footer的高度
-//    public func customSectionFooterSize(_ section: Int, footer: MGSectionGroup.MGSectionFooter) -> CGSize? {
-//        return nil
-//    }
-//}
 
 

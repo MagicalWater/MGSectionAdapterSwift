@@ -11,6 +11,9 @@ import UIKit
 import MGUtilsSwift
 import MGViewsSwift
 
+/**
+ 2018.9.4: 取消加載 置頂/更多 的動畫顯示, 一律改用靜態顯示, 因為使用者操作上可能造成不便
+ */
 open class MGBaseTableAdapter: MGBaseScrollAdapter, MGBaseTableDataBindDelegate, MGBaseTableCustomHeightDelegate {
 
 
@@ -191,11 +194,16 @@ extension MGBaseTableAdapter: UITableViewDelegate, UITableViewDataSource {
         var height: CGFloat?
         if indexPath.section == 0 && sectionGroup.outerHeader {
             //先查看當前是處於置頂刷新狀態
-            if !loadtopHelper.isLoading { height = 0.01 }
-            else { height = customOuterHeaderCellHeight(indexPath) ?? 60 }
+            //2018.9.4: 取消動畫伸縮, 因此這邊一率高度預設60
+//            if !loadtopHelper.isLoading { height = 0.01 }
+//            else { height = customOuterHeaderCellHeight(indexPath) ?? 60 }
+            height = customOuterHeaderCellHeight(indexPath) ?? 60
         } else if (indexPath.section == sectionGroup.getOuterSectionCount()-1) && sectionGroup.outerFooter {
-            if !loadmoreHelper.isLoading { height = 0.01 }
-            else { height = customOuterFooterCellHeight(indexPath) ?? 60 }
+            //先查看當前是處於更多刷新狀態
+            //2018.9.4: 取消動畫伸縮, 因此這邊一率高度預設60
+//            if !loadmoreHelper.isLoading { height = 0.01 }
+//            else { height = customOuterFooterCellHeight(indexPath) ?? 60 }
+            height = customOuterFooterCellHeight(indexPath) ?? 60
         } else {
             //先取得此位置的section
             let sectionData = sectionGroup.getSection(indexPath)
@@ -331,20 +339,28 @@ extension MGBaseTableAdapter: UITableViewDelegate, UITableViewDataSource {
 //            cell = tableView.dequeueReusableCell(withIdentifier: ID_OUTER_TOP) as! MGBaseHeaderFooterTableCell
             cell = tableView.dequeueReusableCell(withIdentifier: ID_OUTER_TOP, for: indexPath) as! MGBaseHeaderFooterTableCell
             cell.backgroundColor = UIColor.clear
-            bindOuterHeaderCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
 
             //如果正在休息, 跳過
             if (!loadtopHelper.isBreath && loadtopDelegate?.hasLoadtop() == true) {
+                settingHeaderText(cell as! MGBaseHeaderFooterTableCell, isLoading: true)
                 //如果正在加載置頂, 也跳過
                 if (!loadtopHelper.isLoading) {
                     loadtopHelper.isLoading = true
+                    //2018.9.4: 取消動畫更新, 一律靜態顯示
+                    //因此也不需要延遲回調
+                    bindOuterHeaderCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
+                    self.loadtopDelegate?.startLoadtop()
 //                    tableView.beginUpdates()
 //                    tableView.endUpdates()
-                    reloadData()
-                    timer.startCountdown(what: 0x1, byDelay: loadtopHelper.animDuration) {
-                        self.loadtopDelegate?.startLoadtop()
-                    }
+//                    timer.startCountdown(what: 0x1, byDelay: loadtopHelper.animDuration) {
+//                        self.loadtopDelegate?.startLoadtop()
+//                    }
+                } else {
+                    bindOuterHeaderCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
                 }
+            } else {
+                settingHeaderText(cell as! MGBaseHeaderFooterTableCell, isLoading: false)
+                bindOuterHeaderCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
             }
 
         } else if (indexPath.section == sectionGroup.getOuterSectionCount()-1) && sectionGroup.outerFooter {
@@ -352,19 +368,28 @@ extension MGBaseTableAdapter: UITableViewDelegate, UITableViewDataSource {
 //            cell = tableView.dequeueReusableCell(withIdentifier: ID_OUTER_BOTTOM) as! MGBaseHeaderFooterTableCell
             cell = tableView.dequeueReusableCell(withIdentifier: ID_OUTER_BOTTOM, for: indexPath) as! MGBaseHeaderFooterTableCell
             cell.backgroundColor = UIColor.clear
-            bindOuterFooterCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
 
             //如果正在休息, 跳過
             if (!loadmoreHelper.isBreath && loadmoreDelegate?.hasLoadmore() == true) {
+                settingFooterText(cell as! MGBaseHeaderFooterTableCell, isLoading: true)
                 //如果正在加載更多, 也跳過
                 if (!loadmoreHelper.isLoading) {
                     loadmoreHelper.isLoading = true
-                    tableView.beginUpdates()
-                    tableView.endUpdates()
-                    timer.startCountdown(what: 0x2, byDelay: loadtopHelper.animDuration) {
-                        self.loadmoreDelegate?.startLoadmore()
-                    }
+                    //2018.9.4: 取消動畫更新, 一律靜態顯示
+                    //因此也不需要延遲回調
+                    bindOuterFooterCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
+                    self.loadmoreDelegate?.startLoadmore()
+//                    tableView.beginUpdates()
+//                    tableView.endUpdates()
+//                    timer.startCountdown(what: 0x2, byDelay: loadtopHelper.animDuration) {
+//                        self.loadmoreDelegate?.startLoadmore()
+//                    }
+                } else {
+                    bindOuterFooterCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
                 }
+            } else {
+                settingFooterText(cell as! MGBaseHeaderFooterTableCell, isLoading: false)
+                bindOuterFooterCell(cell as! MGBaseHeaderFooterTableCell, indexPath: indexPath)
             }
 
         } else {
@@ -386,6 +411,25 @@ extension MGBaseTableAdapter: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    
+    //設定置頂加載文字顯示
+    private func settingHeaderText(_ cell: MGBaseHeaderFooterTableCell, isLoading: Bool) {
+        if isLoading {
+            cell.label.text = "置頂加載中..."
+        } else {
+            cell.label.text = "已是最新"
+        }
+    }
+    
+    //設定置頂加載文字顯示
+    private func settingFooterText(_ cell: MGBaseHeaderFooterTableCell, isLoading: Bool) {
+        if isLoading {
+            cell.label.text = "更多加載中..."
+        } else {
+            cell.label.text = "已無更多"
+        }
+    }
+    
 }
 
 //section相關操作

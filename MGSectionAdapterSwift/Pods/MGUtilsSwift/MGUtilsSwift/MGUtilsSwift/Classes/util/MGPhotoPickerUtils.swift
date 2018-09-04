@@ -19,8 +19,8 @@ public class MGPhotoPickerUtils {
 
     //選擇圖庫圖片
     public func singlePicker(_ inVC: UIViewController, crop: Bool) {
-        let imagePickTool = CLImagePickersTool()
-        imagePickTool.singleImageChooseType = crop ? CLImagePickersToolType.singlePictureCrop : CLImagePickersToolType.singlePicture
+        let imagePickTool = CLImagePickerTool()
+        imagePickTool.singleImageChooseType = crop ? CLImagePickerToolType.singlePictureCrop : CLImagePickerToolType.singlePicture
         imagePickTool.setupImagePickerWith(MaxImagesCount: 1, superVC: inVC) { (asset, cutImage) in
 
             self.pickerDelegate?.pickerImage(cutImage!)

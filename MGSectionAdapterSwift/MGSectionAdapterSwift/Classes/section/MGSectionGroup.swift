@@ -383,7 +383,7 @@ public class MGSectionGroup {
             infos.append($0.getSectionStruct())
         }
         
-        let s = MGJsonDataParseUtils.serialize(infos) ?? ""
+        let s = MGJsonDataParseUtils.serializeString(infos) ?? ""
         return s
     }
 

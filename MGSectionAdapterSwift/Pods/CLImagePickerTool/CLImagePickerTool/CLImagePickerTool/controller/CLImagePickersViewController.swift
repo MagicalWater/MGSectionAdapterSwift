@@ -25,14 +25,14 @@ class CLImagePickersViewController: UINavigationController {
         MaxImagesCount:Int,
         isHiddenVideo:Bool,
         cameraOut:Bool,
-        singleType:CLImagePickersToolType?,
+        singleType:CLImagePickerToolType?,
         singlePictureCropScale:CGFloat?,
         onlyChooseImageOrVideo:Bool,
         singleModelImageCanEditor: Bool,
         isHiddenImage:Bool,
         navColor:UIColor?,
         navTitleColor:UIColor?,
-        statusBarType:CLImagePickersToolStatusBarType,
+        statusBarType:CLImagePickerToolStatusBarType,
         didChooseImageSuccess:@escaping (Array<PHAsset>,UIImage?)->()) -> CLImagePickersViewController {
         
         // 存储用户设置的最多图片数量
@@ -76,7 +76,7 @@ class CLImagePickersViewController: UINavigationController {
     }
     func setupOnce(array:[[String:[CLImagePickerPhotoModel]]],
                    cameraOut:Bool,
-                   singleType:CLImagePickersToolType?,
+                   singleType:CLImagePickerToolType?,
                    singlePictureCropScale:CGFloat?,
                    onlyChooseImageOrVideo:Bool,
                    singleModelImageCanEditor:Bool,
@@ -122,7 +122,7 @@ class CLImageAlbumPickerController: CLBaseImagePickerViewController {
     // 相机是否放在内部
     @objc var cameraOut: Bool = false
     // 单选状态的类型
-    var singleType: CLImagePickersToolType?
+    var singleType: CLImagePickerToolType?
     // 图片裁剪比例
     var singlePictureCropScale: CGFloat?
     // 视频和照片只能选择一种，不能同时选择,默认可以同时选择
@@ -136,7 +136,6 @@ class CLImageAlbumPickerController: CLBaseImagePickerViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 60
-        self.view.addSubview(tableView)
         return tableView
     }()
     
@@ -161,8 +160,19 @@ class CLImageAlbumPickerController: CLBaseImagePickerViewController {
             }
         })
 
+        initConstraints()
     }
     
+    func initConstraints() {
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        let margin: CGFloat = UIDevice.current.isX() == true ? 34:0
+        self.view.addConstraints([
+            NSLayoutConstraint.init(item: self.tableView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: KNavgationBarHeight),
+            NSLayoutConstraint.init(item: self.tableView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: self.tableView, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: self.tableView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -margin)
+            ])
+    }
     override func rightBtnClick() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -170,6 +180,12 @@ class CLImageAlbumPickerController: CLBaseImagePickerViewController {
         self.navTitle = photoStr
         self.backBtn.isHidden = true
         self.rightBtn.setTitle(cancelStr, for: .normal)
+        self.view.addSubview(tableView)
+        
+        if #available(iOS 9.0, *) {
+            self.tableView.cellLayoutMarginsFollowReadableWidth = false
+        } else {
+        }
     }
 
     deinit {

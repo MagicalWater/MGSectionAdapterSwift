@@ -28,7 +28,7 @@ public extension Array {
 
     //仿照kotlin的fin
     public func find(_ handler: (_ value: Element) -> Bool) -> Element? {
-        for (index, value) in self.enumerated() where handler(value) {
+        for (_, value) in self.enumerated() where handler(value) {
             return value
         }
         return nil
