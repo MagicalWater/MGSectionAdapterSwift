@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MGSectionAdapterSwift"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "All item in table/collect can be a section."
 
   # This description is used to generate tags and improve search results.

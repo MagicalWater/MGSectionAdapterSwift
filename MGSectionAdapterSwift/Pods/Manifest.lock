@@ -3,7 +3,7 @@ PODS:
   - Kingfisher (4.9.0)
   - MGBaseViewSwift (0.0.3)
   - MGExtensionSwift (0.0.3)
-  - MGUtilsSwift (0.1.4):
+  - MGUtilsSwift (0.1.7):
     - CLImagePickerTool (~> 2.3.1)
     - Kingfisher (~> 4.0)
     - ReachabilitySwift
@@ -39,7 +39,7 @@ SPEC CHECKSUMS:
   Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
   MGBaseViewSwift: 6cecc5944d10eb55a1332c7576eacd07132846ac
   MGExtensionSwift: 7c7240248cade5185c7ba9d62cbc8d7cc4a777cd
-  MGUtilsSwift: 16dc7a9787f1adf88730f5e88f60ba1bd4aa1f8e
+  MGUtilsSwift: ae38a117fb588bf349b55e8e6d6b577a6485c962
   MGViewsSwift: 4753401b1871eaf5fde9d1bfdab7c61afd2dfc63
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3

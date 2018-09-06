@@ -12,7 +12,7 @@ public class MGSettingUtils {
 
     private init() {}
 
-    public static func setSetting(_ key: String, value: Any?) {
+    public static func put(_ key: String, value: Any?) {
         if let v = value {
             UserDefaults.standard.set(v, forKey: key)
         } else {
@@ -21,14 +21,14 @@ public class MGSettingUtils {
         UserDefaults.standard.synchronize()
     }
 
-    public static func getSetting<T: Any>(_ key: String, def: T) -> T {
+    public static func get<T: Any>(_ key: String, def: T) -> T {
         if let v = UserDefaults.standard.object(forKey: key) {
             return v as! T
         }
         return def
     }
 
-    public static func removeSetting(key: String) {
+    public static func delete(_ key: String) {
         UserDefaults.standard.removeObject(forKey: key)
     }
 

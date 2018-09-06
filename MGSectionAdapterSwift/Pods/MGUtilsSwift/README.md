@@ -7,6 +7,9 @@
 所有蒐集的工具類  
 
 ## 版本
+0.1.7 - 新增 MGVersionUtils, 可用來比較版號, 更改 MGSettingUtils 的相關方法名稱
+0.1.6 - MGJsonDataParseUtils 更名為 MGJsonUtils, 反序列化方法增加泛型
+0.1.5 - 新增 MGResourceUtils, 讀取資源文件
 0.1.4 - 依照 MGPhotoPickerUtils 所依賴的 CLImagePickerTool 類名更改 修改對應 code   
 0.1.3 - FileUtils新增刪除檔案  
 

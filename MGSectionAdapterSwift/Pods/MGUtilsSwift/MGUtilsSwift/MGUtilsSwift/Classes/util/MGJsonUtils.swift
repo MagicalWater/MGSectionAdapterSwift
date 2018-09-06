@@ -9,19 +9,23 @@
 import Foundation
 import SwiftyJSON
 
-public class MGJsonDataParseUtils {
+public class MGJsonUtils {
 
     private init() {}
-
+    
+    //反序列化, 將json變成物件
+    public static func deserialize<T: MGJsonDeserializeDelegate>(_ jsonString: String) -> T? {
+        return deserialize(jsonString, deserialize: T.self)
+    }
 
     //反序列化, 將json變成物件
-    public static func deserialize(_ jsonString: String, deserialize: MGJsonDeserializeDelegate.Type) -> AnyObject? {
+    public static func deserialize<T: MGJsonDeserializeDelegate>(_ jsonString: String, deserialize: T.Type) -> T? {
         guard let json = converToJSON(jsonString) else {
             return nil
         }
 //        print("印出jsonString = \(jsonString), 印出json = \(json.dictionary)")
         let ins = deserialize.init(json)
-        return ins as AnyObject
+        return ins
     }
 
     /*
@@ -62,7 +66,7 @@ public class MGJsonDataParseUtils {
 
     //將字串轉為JSON
     public static func converToJSON(_ string: String) -> JSON? {
-        if let dataFromString = MGJsonDataParseUtils.converToData(string) {
+        if let dataFromString = MGJsonUtils.converToData(string) {
             let j = JSON(dataFromString)
             if !j.isEmpty {
                 return j
@@ -72,7 +76,6 @@ public class MGJsonDataParseUtils {
     }
 
 }
-
 
 //需要返序列化的class一定要繼承此協議
 public protocol MGJsonDeserializeDelegate {

@@ -10,6 +10,7 @@ TableView/CollectionView 通用 Adapter
 2. 擁有無限層級, 讓每個cell都可為一個section  
 
 ## 版本  
+0.0.3 - 因應 MGUtils 的 JSON 工具名稱改變, 修改相對應的名稱  
 0.0.2 - 因應操作流暢度問題, 置頂/更多 加載方式更改為靜態顯示, 而非動畫顯示
 0.0.1 - 初始提交專案  
 
