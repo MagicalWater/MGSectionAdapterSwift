@@ -48,7 +48,7 @@ public class MGAnimationUtils : NSObject, CAAnimationDelegate {
         //如果想讓塗層保持顯示動畫執行後的狀態. 設為 false 即可, 不過還需要設置 fillMode = kCAFillModeForwards
         //設置方式要先設置 isRemovedOnCompletion 再設置 fillMode 才有效
         group.isRemovedOnCompletion = false
-        group.fillMode = kCAFillModeForwards
+        group.fillMode = CAMediaTimingFillMode.forwards
         group.delegate = self
 
 //        group.repeatCount = 1 //重複次數

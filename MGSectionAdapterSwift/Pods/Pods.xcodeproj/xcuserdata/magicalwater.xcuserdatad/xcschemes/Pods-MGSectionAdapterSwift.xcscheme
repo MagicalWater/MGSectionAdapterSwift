@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "79CEC9BC88725D3BC2E2A549BA240B79"
+               BlueprintIdentifier = "23728C0588617E30BBD985FAEDF6918F"
                BuildableName = "Pods_MGSectionAdapterSwift.framework"
                BlueprintName = "Pods-MGSectionAdapterSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "79CEC9BC88725D3BC2E2A549BA240B79"
+            BlueprintIdentifier = "23728C0588617E30BBD985FAEDF6918F"
             BuildableName = "Pods_MGSectionAdapterSwift.framework"
             BlueprintName = "Pods-MGSectionAdapterSwift"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -61,6 +61,62 @@ public class MGNetworkDetectUtils {
         networkDelegate?.networkStatusChange(status)
     }
 
+    //取得內部ip, 因為是複製別人的方法, 目前還沒瞭解具體操作流程, 因此留下原本的註解
+    // Return IP address of WiFi interface (en0) as a String, or `nil`
+    func getWiFiAddress() -> String? {
+        var address : String?
+        
+        // Get list of all interfaces on the local machine:
+        var ifaddr : UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddr) == 0 else { return nil }
+        guard let firstAddr = ifaddr else { return nil }
+        
+        // For each interface ...
+        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+            let interface = ifptr.pointee
+            
+            // Check for IPv4 or IPv6 interface:
+            let addrFamily = interface.ifa_addr.pointee.sa_family
+            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
+                
+                // Check interface name:
+                let name = String(cString: interface.ifa_name)
+                if  name == "en0" {
+                    
+                    // Convert interface address to a human readable string:
+                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
+                                &hostname, socklen_t(hostname.count),
+                                nil, socklen_t(0), NI_NUMERICHOST)
+                    address = String(cString: hostname)
+                }
+            }
+        }
+        freeifaddrs(ifaddr)
+        
+        return address
+    }
+    
+    //取得外部ip, 使用第三方lib -> Ipify
+    //Ipify: https://github.com/vincent-peng/swift-ipify
+    //api: https://api.ipify.org?format=json
+    func getPublicIpAddress(handler: @escaping ((String?) -> Void)) {
+        let url = URL.init(string: "https://api.ipify.org?format=json")!
+        MGNetworkUtils.share.get(url: url, params: nil, paramEncoding: MGURLEncoding.default, headers: nil) { response in
+            if response.success {
+                let jsonText = String.init(data: response.data!, encoding: .utf8)!
+                let model: ApiIPModel = MGJsonUtils.deserialize(from: jsonText)!
+                handler(model.ip)
+            } else {
+                handler(nil)
+            }
+        }
+    }
+    
+    //反序列化對外ip的api json text
+    class ApiIPModel: Codable {
+        var ip: String
+    }
 }
 
 

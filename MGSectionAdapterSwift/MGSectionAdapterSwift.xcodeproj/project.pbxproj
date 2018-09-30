@@ -10,6 +10,7 @@
 		8AF9B0A1DE8C2843993A61FD /* Pods_MGSectionAdapterSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F482576014D28F0F1AA8AB /* Pods_MGSectionAdapterSwift.framework */; };
 		B8160B76213E490E000EB4BD /* MGSectionAdapterSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B8160B75213E490E000EB4BD /* MGSectionAdapterSwift.podspec */; };
 		B8160B78213E4915000EB4BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B8160B77213E4915000EB4BD /* README.md */; };
+		B823926D2160CD9400B5F753 /* MGVerticalCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823926C2160CD9400B5F753 /* MGVerticalCollectionAdapter.swift */; };
 		B8776D80207C9C2200CC8442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8776D7F207C9C2200CC8442 /* AppDelegate.swift */; };
 		B8776D82207C9C2200CC8442 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8776D81207C9C2200CC8442 /* ViewController.swift */; };
 		B8776D85207C9C2200CC8442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8776D83207C9C2200CC8442 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		B3FFBEE05ABC061662EC5A0E /* Pods-MGSectionAdapterSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGSectionAdapterSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MGSectionAdapterSwift/Pods-MGSectionAdapterSwift.release.xcconfig"; sourceTree = "<group>"; };
 		B8160B75213E490E000EB4BD /* MGSectionAdapterSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MGSectionAdapterSwift.podspec; path = ../../MGSectionAdapterSwift.podspec; sourceTree = "<group>"; };
 		B8160B77213E4915000EB4BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		B823926C2160CD9400B5F753 /* MGVerticalCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGVerticalCollectionAdapter.swift; sourceTree = "<group>"; };
 		B8776D7C207C9C2200CC8442 /* MGSectionAdapterSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGSectionAdapterSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8776D7F207C9C2200CC8442 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8776D81207C9C2200CC8442 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				B8776D96207C9CB900CC8442 /* MGBaseScrollAdapter.swift */,
 				B8776D93207C9CB900CC8442 /* MGBaseCollectionAdapter.swift */,
 				B8776D97207C9CB900CC8442 /* MGBaseTableAdapter.swift */,
+				B823926C2160CD9400B5F753 /* MGVerticalCollectionAdapter.swift */,
 			);
 			path = adapter;
 			sourceTree = "<group>";
@@ -284,27 +287,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MGSectionAdapterSwift/Pods-MGSectionAdapterSwift-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CLImagePickerTool/CLImagePickerTool.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MGBaseViewSwift/MGBaseViewSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MGExtensionSwift/MGExtensionSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MGUtilsSwift/MGUtilsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MGViewsSwift/MGViewsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CLImagePickerTool.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGBaseViewSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGExtensionSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGUtilsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGViewsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -331,6 +328,7 @@
 				B8776DA2207C9CB900CC8442 /* MGBaseCollectionAdapter.swift in Sources */,
 				B8776D80207C9C2200CC8442 /* AppDelegate.swift in Sources */,
 				B8776DA6207C9CB900CC8442 /* MGBaseTableAdapter.swift in Sources */,
+				B823926D2160CD9400B5F753 /* MGVerticalCollectionAdapter.swift in Sources */,
 				B8776DA8207C9CB900CC8442 /* MGLoadmoreDelegate.swift in Sources */,
 				B8776DAB207C9CB900CC8442 /* MGLoadtopHelper.swift in Sources */,
 				B8776DAC207C9CB900CC8442 /* MGSection.swift in Sources */,
@@ -478,7 +476,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.magicalwater.MGSectionAdapterSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -494,7 +492,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.magicalwater.MGSectionAdapterSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -1,21 +1,15 @@
 PODS:
-  - CLImagePickerTool (2.3.1)
-  - Kingfisher (4.9.0)
-  - MGBaseViewSwift (0.0.3)
-  - MGExtensionSwift (0.0.3)
-  - MGUtilsSwift (0.1.7):
-    - CLImagePickerTool (~> 2.3.1)
-    - Kingfisher (~> 4.0)
+  - Kingfisher (4.10.0)
+  - MGBaseViewSwift (0.0.6)
+  - MGExtensionSwift (1.0.0)
+  - MGUtilsSwift (1.0.0):
+    - Kingfisher (~> 4.10.0)
     - ReachabilitySwift
-    - SwiftyJSON
-    - Toast-Swift (~> 3.0.1)
-  - MGViewsSwift (0.1.2):
+  - MGViewsSwift (1.0.0):
     - MGBaseViewSwift
     - MGExtensionSwift
     - MGUtilsSwift
   - ReachabilitySwift (4.2.1)
-  - SwiftyJSON (4.1.0)
-  - Toast-Swift (3.0.1)
 
 DEPENDENCIES:
   - MGExtensionSwift
@@ -24,26 +18,20 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - CLImagePickerTool
     - Kingfisher
     - MGBaseViewSwift
     - MGExtensionSwift
     - MGUtilsSwift
     - MGViewsSwift
     - ReachabilitySwift
-    - SwiftyJSON
-    - Toast-Swift
 
 SPEC CHECKSUMS:
-  CLImagePickerTool: cb3bda742d5125943190523edeb3d4751e84cde3
-  Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
-  MGBaseViewSwift: 6cecc5944d10eb55a1332c7576eacd07132846ac
-  MGExtensionSwift: 7c7240248cade5185c7ba9d62cbc8d7cc4a777cd
-  MGUtilsSwift: ae38a117fb588bf349b55e8e6d6b577a6485c962
-  MGViewsSwift: 4753401b1871eaf5fde9d1bfdab7c61afd2dfc63
+  Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
+  MGBaseViewSwift: c8caa298ab65c370b4d1ad9e35bdf8d114b950b2
+  MGExtensionSwift: f2706dbfb1e0dfeade0defcdd9271736b2fcf009
+  MGUtilsSwift: 11d0761eaa80b087856d6bd99204ae445ac18441
+  MGViewsSwift: 107527675eab2d6e742329c8c376e1500b542a56
   ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
-  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
 PODFILE CHECKSUM: 066199a03f8060c1112b28b9d3724184b178ca07
 

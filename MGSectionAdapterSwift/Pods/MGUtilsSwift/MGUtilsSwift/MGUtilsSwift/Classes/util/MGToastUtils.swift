@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Toast_Swift
+import UIKit
 
 public class MGToastUtils {
 

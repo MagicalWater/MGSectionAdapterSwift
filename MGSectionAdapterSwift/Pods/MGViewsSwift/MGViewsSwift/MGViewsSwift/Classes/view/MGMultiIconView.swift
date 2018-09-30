@@ -10,51 +10,51 @@ import UIKit
 import MGExtensionSwift
 import MGBaseViewSwift
 
-@IBDesignable class MGMultiIconView: MGBaseView {
+@IBDesignable public class MGMultiIconView: MGBaseView {
 
-    @IBInspectable var normalImage: UIImage? {
+    @IBInspectable public var normalImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
-    @IBInspectable var highlightImage: UIImage? {
-        didSet { setNeedsDisplay() }
-    }
-
-    @IBInspectable var normalImageColor: UIColor? {
-        didSet { setNeedsDisplay() }
-    }
-    @IBInspectable var highlightImageColor: UIColor? {
+    @IBInspectable public var highlightImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
 
-    @IBInspectable var normalTextColor: UIColor = UIColor.black {
+    @IBInspectable public var normalImageColor: UIColor? {
         didSet { setNeedsDisplay() }
     }
-    @IBInspectable var highlightTextColor: UIColor = UIColor.black {
+    @IBInspectable public var highlightImageColor: UIColor? {
+        didSet { setNeedsDisplay() }
+    }
+
+    @IBInspectable public var normalTextColor: UIColor = UIColor.black {
+        didSet { setNeedsDisplay() }
+    }
+    @IBInspectable public var highlightTextColor: UIColor = UIColor.black {
         didSet { setNeedsDisplay() }
     }
 
     //圖片跟文字得距離
-    @IBInspectable var spaceBetweenTextImag: CGFloat = 0 {
+    @IBInspectable public var spaceBetweenTextImag: CGFloat = 0 {
         didSet { setNeedsDisplay() }
     }
 
-    @IBInspectable var normalText: String? {
+    @IBInspectable public var normalText: String? {
         didSet { setNeedsDisplay() }
     }
-    @IBInspectable var highlightText: String? {
-        didSet { setNeedsDisplay() }
-    }
-
-    @IBInspectable var textSize: CGFloat = 10 {
+    @IBInspectable public var highlightText: String? {
         didSet { setNeedsDisplay() }
     }
 
-    @IBInspectable var isHighlight: Bool = false {
+    @IBInspectable public var textSize: CGFloat = 10 {
+        didSet { setNeedsDisplay() }
+    }
+
+    @IBInspectable public var isHighlight: Bool = false {
         didSet { setNeedsDisplay() }
     }
 
 
-    override var bounds: CGRect {
+    override public var bounds: CGRect {
         didSet { setNeedsDisplay() }
     }
 
@@ -98,10 +98,10 @@ import MGBaseViewSwift
             let txtRect = CGRect(x: rect.minX, y: imgRect.maxY + spaceBetweenTextImag, width: rect.width, height: lineH)
             let style: NSMutableParagraphStyle = NSMutableParagraphStyle()
             style.alignment = .center
-            let stingAttrs: [NSAttributedStringKey : Any] = [
-                NSAttributedStringKey.font : font
-                , NSAttributedStringKey.foregroundColor : inTextColor
-                , NSAttributedStringKey.paragraphStyle : style
+            let stingAttrs: [NSAttributedString.Key : Any] = [
+                NSAttributedString.Key.font : font,
+                NSAttributedString.Key.foregroundColor : inTextColor,
+                NSAttributedString.Key.paragraphStyle : style
             ]
             t.draw(in: txtRect, withAttributes: stingAttrs)
         } else {

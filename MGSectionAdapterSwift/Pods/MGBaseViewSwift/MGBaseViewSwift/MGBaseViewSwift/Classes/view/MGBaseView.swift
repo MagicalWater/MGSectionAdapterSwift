@@ -18,18 +18,43 @@ import UIKit
  5. padding屬性引入
  */
 open class MGBaseView : UIView {
-
+    
     //padding預設值, 以此判斷padding某邊是否有設定
     private static let PADDING_DEFAULT: CGFloat = -1001
-
+    
     //padding屬性, 如果任一邊值不等於-1001, 則以有設定那邊為主
     //取用真實的屬性以 left, right, top, bottom開頭的padding為主
-    @IBInspectable var padding: CGFloat = 0
-    @IBInspectable var paddingLeft: CGFloat = MGBaseView.PADDING_DEFAULT
-    @IBInspectable var paddingRight: CGFloat = MGBaseView.PADDING_DEFAULT
-    @IBInspectable var paddingTop: CGFloat = MGBaseView.PADDING_DEFAULT
-    @IBInspectable var paddingBottom: CGFloat = MGBaseView.PADDING_DEFAULT
-
+    @IBInspectable public var padding: CGFloat = 0
+    @IBInspectable public var paddingLeft: CGFloat = MGBaseView.PADDING_DEFAULT
+    @IBInspectable public var paddingRight: CGFloat = MGBaseView.PADDING_DEFAULT
+    @IBInspectable public var paddingTop: CGFloat = MGBaseView.PADDING_DEFAULT
+    @IBInspectable public var paddingBottom: CGFloat = MGBaseView.PADDING_DEFAULT
+    
+    //陰影透明值
+    @IBInspectable public var shadowOpacity: Float = 0 {
+        didSet { settingShadow() }
+    }
+    
+    //陰影範圍, 數值越高陰影越模糊越分散
+    @IBInspectable public var shadowRadius: CGFloat = 0 {
+        didSet { settingShadow() }
+    }
+    
+    //陰影顏色
+    @IBInspectable public var shadowColor: UIColor? = nil {
+        didSet { settingShadow() }
+    }
+    
+    //陰影x偏移
+    @IBInspectable public var shadowOffsetX: CGFloat = 0 {
+        didSet { settingShadow() }
+    }
+    
+    //陰影y偏移
+    @IBInspectable public var shadowOffsetY: CGFloat = 0 {
+        didSet { settingShadow() }
+    }
+    
     private var leftPadding: CGFloat {
         get { return paddingLeft == MGBaseView.PADDING_DEFAULT ? padding : paddingLeft }
     }
@@ -66,23 +91,34 @@ open class MGBaseView : UIView {
     public var realCenterY: CGFloat {
         get { return (realY + realEndY)/2 }
     }
-
+    
     //觸摸回饋
     @IBInspectable var touchAlpha: Bool = false
-
+    
     //如果有載入xib, 這個就會有值
     public var content: UIView?
-
+    
     private var onClickListener: ((UIView) -> Void)?
-
-
+    
+    //設置陰影
+    private func settingShadow() {
+        if let clr = shadowColor, shadowOpacity > 0 {
+            self.layer.shadowOffset = CGSize.init(width: shadowOffsetX, height: shadowOffsetY)
+            self.layer.shadowOpacity = shadowOpacity
+            self.layer.shadowRadius = shadowRadius
+            self.layer.shadowColor = clr.cgColor
+        } else {
+            self.layer.shadowOffset = CGSize.init(width: 0, height: -1)
+            self.layer.shadowOpacity = 0
+        }
+    }
+    
     //加入子view, 如果需要
     public func loadContentIfNeed() {
         if let content = contentView() {
             addSubview(content)
             self.content = content
             content.frame = self.bounds
-
             content.translatesAutoresizingMaskIntoConstraints = false
             content.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -92,10 +128,10 @@ open class MGBaseView : UIView {
             let nibs = nib.instantiate(withOwner: self, options: nil)
             if let view = nibs.first as? UIView {
                 self.content = view
-//                view.translatesAutoresizingMaskIntoConstraints = false
+                //                view.translatesAutoresizingMaskIntoConstraints = false
                 addSubview(view)
                 view.frame = self.bounds
-
+                
                 view.translatesAutoresizingMaskIntoConstraints = false
                 view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
                 view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -107,21 +143,22 @@ open class MGBaseView : UIView {
             }
         }
     }
-
+    
     //是否自動載入xib的view到子view, 判斷此優先, 再來是 Nib 也可以
     open func contentView() -> UIView? { return nil }
-
+    
     //是否自動載入xib的view到子view, 判斷此優先, 再來是 Nib 也可以
     open func contentNib() -> UINib? { return nil }
-
+    
     //view的初始化皆從這裡開始, 以後不用再覆寫 init 的兩個方法
     open func setupView() {}
-
+    
+    
     //如同android view一樣
     public func setOnClickListener(_ handler: ((UIView) -> Void)?) {
         self.onClickListener = handler
     }
-
+    
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touchAlpha { self.alpha = 0.7 }
     }

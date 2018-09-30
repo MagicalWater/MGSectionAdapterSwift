@@ -104,7 +104,7 @@ public class MGRichTextUtils {
             if addNewLine {
 
                 let attrArray = [
-                    NSAttributedStringKey.paragraphStyle : paraph
+                    NSAttributedString.Key.paragraphStyle : paraph
                 ]
                 let nsAttr = NSAttributedString.init(string: "\n", attributes: attrArray)
                 stAttr.append(nsAttr)
@@ -114,7 +114,7 @@ public class MGRichTextUtils {
             }
 
             let range = (t.string as NSString).range(of: t.string)
-            t.addAttribute(NSAttributedStringKey.paragraphStyle, value: paraph, range: range)
+            t.addAttribute(NSAttributedString.Key.paragraphStyle, value: paraph, range: range)
             stAttr.append(t)
 
         }
@@ -138,20 +138,20 @@ public class MGRichTextUtils {
     private static func getAttrString(_ attr: RichAttr) -> NSAttributedString {
 
         var attrArray = [
-            NSAttributedStringKey.font : attr.isBold ? UIFont.boldSystemFont(ofSize: attr.size) : UIFont.systemFont(ofSize: attr.size),
-            NSAttributedStringKey.foregroundColor : attr.color,
-            NSAttributedStringKey.baselineOffset : NSNumber(value: 0) //設定基準線偏移
+            NSAttributedString.Key.font : attr.isBold ? UIFont.boldSystemFont(ofSize: attr.size) : UIFont.systemFont(ofSize: attr.size),
+            NSAttributedString.Key.foregroundColor : attr.color,
+            NSAttributedString.Key.baselineOffset : NSNumber(value: 0) //設定基準線偏移
         ]
 
         let paraph = NSMutableParagraphStyle()
         paraph.alignment = attr.alignment
 
         if attr.isDelete {
-            attrArray[NSAttributedStringKey.strikethroughStyle] = NSNumber.init(value: 1)
+            attrArray[NSAttributedString.Key.strikethroughStyle] = NSNumber.init(value: 1)
         }
 
         if let ls = attr.lineSpace { paraph.lineSpacing = ls }
-        attrArray[NSAttributedStringKey.paragraphStyle] = paraph
+        attrArray[NSAttributedString.Key.paragraphStyle] = paraph
 
         let nsAttr = NSAttributedString(string: attr.text, attributes: attrArray)
         return nsAttr

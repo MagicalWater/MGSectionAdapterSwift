@@ -18,7 +18,7 @@ public class MGImageUtils {
 
     public static func toBase64String(_ image: UIImage) -> String? {
         //Now use image to create into NSData format
-        let imageData = UIImagePNGRepresentation(image)
+        let imageData = image.pngData()
         let strBase64 = imageData?.base64EncodedString(options: .lineLength64Characters)
         return strBase64
     }

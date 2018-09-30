@@ -40,7 +40,7 @@ open class MGPanMoveView: MGBaseView {
             return
         }
         // 把當前view 移動到最上面
-        self.superview?.bringSubview(toFront: self)
+        self.superview?.bringSubviewToFront(self)
         self.startPoint = (touches.first?.location(in: self))!
         super.touchesBegan(touches, with: event)
     }

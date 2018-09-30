@@ -25,7 +25,7 @@ public class MGSectionPos : Hashable {
 
 }
 
-public class MGSection {
+public class MGSection : Codable {
 
     public var father: MGSection? = nil
     public var child: [MGSection] = []
